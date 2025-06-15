@@ -53,20 +53,23 @@ public class PharmacyCapstoneDbContext : IdentityDbContext<IdentityUser>
         });
 
         modelBuilder.Entity<Medication>().HasData(
-            new Medication { Id = 1, Name = "Amoxicillin", Manufacturer = "Apotex Corp", ExpirationDate = new DateTime(2026, 1, 1), QuantityInStock = 100, UserId = 1 },
-            new Medication { Id = 2, Name = "Lisinopril", Manufacturer = "Merck", ExpirationDate = new DateTime(2026, 2, 15), QuantityInStock = 150, UserId = 1 },
-            new Medication { Id = 3, Name = "Simvastatin", Manufacturer = "Teva Pharmaceuticals", ExpirationDate = new DateTime(2026, 3, 10), QuantityInStock = 200, UserId = 1 },
-            new Medication { Id = 4, Name = "Metformin", Manufacturer = "Bristol-Myers Squibb", ExpirationDate = new DateTime(2026, 4, 5), QuantityInStock = 120, UserId = 1 },
-            new Medication { Id = 5, Name = "Amlodipine", Manufacturer = "Pfizer", ExpirationDate = new DateTime(2026, 5, 20), QuantityInStock = 180, UserId = 1 }
+            new Medication { Id = 1, Name = "Amoxicillin", Manufacturer = "Apotex Corp", ExpirationDate = new DateTime(2026, 1, 1), QuantityInStock = 100, UserProfileId = 1 },
+            new Medication { Id = 2, Name = "Lisinopril", Manufacturer = "Merck", ExpirationDate = new DateTime(2026, 2, 15), QuantityInStock = 150, UserProfileId = 1 },
+            new Medication { Id = 3, Name = "Simvastatin", Manufacturer = "Teva Pharmaceuticals", ExpirationDate = new DateTime(2026, 3, 10), QuantityInStock = 200, UserProfileId = 1 },
+            new Medication { Id = 4, Name = "Metformin", Manufacturer = "Bristol-Myers Squibb", ExpirationDate = new DateTime(2026, 4, 5), QuantityInStock = 120, UserProfileId = 1 },
+            new Medication { Id = 5, Name = "Amlodipine", Manufacturer = "Pfizer", ExpirationDate = new DateTime(2026, 5, 20), QuantityInStock = 180, UserProfileId = 1 }
         );
 
         modelBuilder.Entity<Supplier>().HasData(
-            new Supplier { Id = 1, Name = "McKesson Corporation", ContactInfo = "Jane Doe, 555-123-4567, jane.doe@mckesson.com", UserId = 1 },
-            new Supplier { Id = 2, Name = "Cardinal Health", ContactInfo = "John Smith, 555-987-6543, john.smith@cardinalhealth.com", UserId = 1 },
-            new Supplier { Id = 3, Name = "AmerisourceBergen", ContactInfo = "Alice Johnson, 555-246-8013, alice.johnson@amerisourcebergen.com", UserId = 1 },
-            new Supplier { Id = 4, Name = "CVS Health", ContactInfo = "Bob Williams, 555-135-7924, bob.williams@cvshealth.com", UserId = 1 },
-            new Supplier { Id = 5, Name = "Walgreens Boots Alliance", ContactInfo = "Emily Brown, 555-864-2057, emily.brown@walgreens.com", UserId = 1 }
+            new Supplier { Id = 1, Name = "McKesson Corporation", ContactInfo = "Jane Doe, 555-123-4567, jane.doe@mckesson.com", UserProfileId = 1 },
+            new Supplier { Id = 2, Name = "Cardinal Health", ContactInfo = "John Smith, 555-987-6543, john.smith@cardinalhealth.com", UserProfileId = 1 },
+            new Supplier { Id = 3, Name = "AmerisourceBergen", ContactInfo = "Alice Johnson, 555-246-8013, alice.johnson@amerisourcebergen.com", UserProfileId = 1 },
+            new Supplier { Id = 4, Name = "CVS Health", ContactInfo = "Bob Williams, 555-135-7924, bob.williams@cvshealth.com", UserProfileId = 1 },
+            new Supplier { Id = 5, Name = "Walgreens Boots Alliance", ContactInfo = "Emily Brown, 555-864-2057, emily.brown@walgreens.com", UserProfileId = 1 }
         );
+
+        modelBuilder.Entity<MedicationSupplier>()
+            .HasKey(ms => new { ms.MedicationId, ms.SupplierId });
 
         modelBuilder.Entity<MedicationSupplier>().HasData(
             new MedicationSupplier { MedicationId = 1, SupplierId = 1 },
@@ -77,11 +80,11 @@ public class PharmacyCapstoneDbContext : IdentityDbContext<IdentityUser>
         );
 
         modelBuilder.Entity<RestockLog>().HasData(
-            new RestockLog { Id = 1, MedicationId = new Medication { Id = 1 }, SupplierId = new Supplier { Id = 1 }, QuantityAdded = 50, DateAdded = new DateTime(2025, 6, 10) },
-            new RestockLog { Id = 2, MedicationId = new Medication { Id = 2 }, SupplierId = new Supplier { Id = 2 }, QuantityAdded = 75, DateAdded = new DateTime(2025, 6, 11) },
-            new RestockLog { Id = 3, MedicationId = new Medication { Id = 3 }, SupplierId = new Supplier { Id = 3 }, QuantityAdded = 100, DateAdded = new DateTime(2025, 6, 12) },
-            new RestockLog { Id = 4, MedicationId = new Medication { Id = 4 }, SupplierId = new Supplier { Id = 4 }, QuantityAdded = 60, DateAdded = new DateTime(2025, 6, 13) },
-            new RestockLog { Id = 5, MedicationId = new Medication { Id = 5 }, SupplierId = new Supplier { Id = 5 }, QuantityAdded = 80, DateAdded = new DateTime(2025, 6, 14) }
+            new RestockLog { Id = 1, MedicationId = 1, SupplierId = 1, QuantityAdded = 50, DateAdded = new DateTime(2025, 6, 10), UserProfileId = 1 },
+            new RestockLog { Id = 2, MedicationId = 2, SupplierId = 2, QuantityAdded = 75, DateAdded = new DateTime(2025, 6, 11), UserProfileId = 1 },
+            new RestockLog { Id = 3, MedicationId = 3, SupplierId = 3, QuantityAdded = 100, DateAdded = new DateTime(2025, 6, 12), UserProfileId = 1 },
+            new RestockLog { Id = 4, MedicationId = 4, SupplierId = 4, QuantityAdded = 60, DateAdded = new DateTime(2025, 6, 13), UserProfileId = 1 },
+            new RestockLog { Id = 5, MedicationId = 5, SupplierId = 5, QuantityAdded = 80, DateAdded = new DateTime(2025, 6, 14), UserProfileId = 1 }
         );
 
     }

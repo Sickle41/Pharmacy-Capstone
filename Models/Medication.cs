@@ -9,7 +9,7 @@ public class Medication
     public string Manufacturer { get; set; }
     public DateTime ExpirationDate { get; set; }
     public int QuantityInStock { get; set; }
-    public int UserId { get; set; }
+    public int UserProfileId { get; set; }
     public UserProfile UserProfile { get; set; }
     public List<MedicationSupplier> MedicationSuppliers { get; set; }
 }
