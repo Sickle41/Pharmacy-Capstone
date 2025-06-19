@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { getMedications, expiringMedications } from "../../managers/medicationManager";
+import { getMedications, expiringSoonMedications } from "../../managers/medicationManager";
+import { recentRestocks } from "../../managers/restockManager";
 import "./Home.css";
 
 export const Home = () => {
@@ -12,12 +13,10 @@ export const Home = () => {
             .then(setMedications);
 
         // Fetch restocks for the past month
-        fetch("/api/restocklog/pastmonth")
-            .then((res) => res.json())
-            .then(setRestocks);
-
+        recentRestocks()
+            .then(setRestocks)
         // Fetch medications expiring in the next month
-        expiringMedications()
+        expiringSoonMedications()
             .then(setExpiringMedications);
     }, []);
 
