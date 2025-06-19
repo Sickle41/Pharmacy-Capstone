@@ -57,7 +57,10 @@ public class PharmacyCapstoneDbContext : IdentityDbContext<IdentityUser>
             new Medication { Id = 2, Name = "Lisinopril", Manufacturer = "Merck", ExpirationDate = new DateTime(2026, 2, 15), QuantityInStock = 150, UserProfileId = 1 },
             new Medication { Id = 3, Name = "Simvastatin", Manufacturer = "Teva Pharmaceuticals", ExpirationDate = new DateTime(2026, 3, 10), QuantityInStock = 200, UserProfileId = 1 },
             new Medication { Id = 4, Name = "Metformin", Manufacturer = "Bristol-Myers Squibb", ExpirationDate = new DateTime(2026, 4, 5), QuantityInStock = 120, UserProfileId = 1 },
-            new Medication { Id = 5, Name = "Amlodipine", Manufacturer = "Pfizer", ExpirationDate = new DateTime(2026, 5, 20), QuantityInStock = 180, UserProfileId = 1 }
+            new Medication { Id = 5, Name = "Amlodipine", Manufacturer = "Pfizer", ExpirationDate = new DateTime(2026, 5, 20), QuantityInStock = 180, UserProfileId = 1 },
+            new Medication { Id = 6, Name = "Atorvastatin", Manufacturer = "Apotex Corp", ExpirationDate = DateTime.Now.AddDays(25), QuantityInStock = 50, UserProfileId = 1 },
+            new Medication { Id = 7, Name = "Levothyroxine", Manufacturer = "Merck", ExpirationDate = DateTime.Now.AddMonths(1), QuantityInStock = 100, UserProfileId = 1 },
+            new Medication { Id = 8, Name = "Metoprolol", Manufacturer = "Teva Pharmaceuticals", ExpirationDate = DateTime.Now.AddMonths(2), QuantityInStock = 75, UserProfileId = 1 }
         );
 
         modelBuilder.Entity<Supplier>().HasData(
