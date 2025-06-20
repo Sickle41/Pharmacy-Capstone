@@ -38,6 +38,7 @@ public class RestockLogController : ControllerBase
             Medication = r.Medication.Name,
             Supplier = r.Supplier.Name,
             QuantityAdded = r.QuantityAdded,
+            Date = r.DateAdded,
 
         }).ToList();
 
