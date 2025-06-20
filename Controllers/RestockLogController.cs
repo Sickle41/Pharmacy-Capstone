@@ -16,12 +16,32 @@ namespace PharmacyCapstone.Controllers;
 
 public class RestockLogController : ControllerBase
 {
-     private PharmacyCapstoneDbContext _dbContext;
-    private UserManager<IdentityUser> _userManager;
+    private PharmacyCapstoneDbContext _dbContext;
+
 
     public RestockLogController(PharmacyCapstoneDbContext context, UserManager<IdentityUser> userManager)
     {
         _dbContext = context;
-        _userManager = userManager;
+
+    }
+
+    [HttpGet("RecentRestock")]
+
+    public IActionResult GetRecentRestocks()
+    {
+        DateTime today = DateTime.Now;
+        DateTime lastMonth = today.AddMonths(-1);
+        var RestockLog = _dbContext.RestockLogs.Where(r => r.DateAdded <= today && r.DateAdded >= lastMonth)
+        .Select(r => new RestockLogDto
+        {
+            Id = r.Id,
+            Medication = r.Medication.Name,
+            Supplier = r.Supplier.Name,
+            QuantityAdded = r.QuantityAdded,
+            Date = r.DateAdded,
+
+        }).ToList();
+
+        return Ok(RestockLog);
     }
 }
