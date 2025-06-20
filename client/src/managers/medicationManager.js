@@ -22,3 +22,14 @@ export const updateMedication = (medication) => {
         return res.status; // Return the status code for success
     });
 };
+
+export const deleteMedication = (medication) => {
+    return fetch(`${_apiUrl}/${medication.id}`, {
+        method: "DELETE",
+    }).then((res) => {
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.status; // Return the status code for success
+    });
+};
