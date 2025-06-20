@@ -10,17 +10,31 @@ export const Home = () => {
 
     useEffect(() => {
         getMedications()
-            .then(setMedications);
+            .then((data) => {
+                console.log("Medications:", data);
+                setMedications(data);
+            });
 
         // Fetch restocks for the past month
         recentRestocks()
             .then(setRestocks)
+            .then(() => {
+                console.log("Restocks:", restocks);
+            });
         // Fetch medications expiring in the next month
         expiringSoonMedications()
             .then(setExpiringMedications);
     }, []);
 
-    const totalQuantity = medications.reduce((sum, medication) => sum + medication.quantity, 0);
+    const calculateTotalQuantity = () => {
+        let total = 0;
+        medications.forEach(medication => {
+            total += (parseInt(medication.quantityInStock) || 0);
+        });
+        return total;
+    };
+
+    const totalQuantity = calculateTotalQuantity();
 
     return (
         <div className="home-container">
@@ -33,10 +47,10 @@ export const Home = () => {
                 <h2>Restocks (Past Month)</h2>
                 <ul>
                     {restocks.map((restock) => (
-                        <li key={restock.id}>
-                            {restock.medicationName} - {restock.quantity} - {restock.restockDate}
-                        </li>
-                    ))}
+                            <li key={restock.id}>
+                               Name {restock.medication} - Quantity Added {restock.quantityAdded} - Date Added {new Date(restock.date).toLocaleDateString()}
+                            </li>
+                        ))}
                 </ul>
             </div>
             <div className="column">
@@ -44,7 +58,7 @@ export const Home = () => {
                 <ul>
                     {expiringMedications.map((medication) => (
                         <li key={medication.id}>
-                            {medication.name} - {medication.expirationDate}
+                            {medication.name} - Expiration Date {new Date(medication.expirationDate).toLocaleDateString()}
                         </li>
                     ))}
                 </ul>

@@ -27,7 +27,13 @@ return (
         <>
             <NavbarToggler onClick={toggleNavbar} />
             <Collapse isOpen={open} navbar>
-            <Nav navbar></Nav>
+            <Nav navbar>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/">
+                        Home
+                    </NavLink>
+                </NavItem>
+            </Nav>
             </Collapse>
             <Button
             color="primary"
@@ -50,6 +56,7 @@ return (
                 <Button color="primary">Login</Button>
             </NavLink>
             </NavItem>
+
         </Nav>
         )}
     </Navbar>
