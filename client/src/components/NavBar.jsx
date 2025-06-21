@@ -33,6 +33,11 @@ return (
                         Home
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/medications">
+                        Medications
+                    </NavLink>
+                </NavItem>
             </Nav>
             </Collapse>
             <Button

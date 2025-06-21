@@ -19,8 +19,12 @@ export const updateMedication = (medication) => {
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
-        return res.status; // Return the status code for success
+        return res.json(); // Return the JSON response for success
     });
+};
+
+export const getMedicationById = (id) => {
+    return fetch(`${_apiUrl}/${id}`).then((res) => res.json());
 };
 
 export const deleteMedication = (medication) => {

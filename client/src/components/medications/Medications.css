@@ -1,0 +1,21 @@
+.medications-container {
+    padding: 20px;
+  }
+  
+  .medications-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .medication-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .medication-actions button {
+    margin-left: 10px;
+    cursor: pointer;
+  }
