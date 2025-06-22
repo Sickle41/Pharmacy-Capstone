@@ -56,7 +56,10 @@ export const Medications = () => {
             return;
         }
 
-        const updatedMedication = { ...editingMedication, name: editedMedicationName };
+        const updatedMedication = {
+            ...editingMedication,
+            name: editedMedicationName
+        };
 
         updateMedication(updatedMedication)
             .then(() => {
@@ -72,38 +75,85 @@ export const Medications = () => {
     return (
         <div className="medications-container">
             <h2>Medications</h2>
-            <ul className="medications-list">
-                {medications.map((medication) => (
-                    <li className="medication-item" key={medication.id}>
-                        {editingMedication?.id === medication.id ? (
-                            <>
-                                <input
-                                    type="text"
-                                    value={editedMedicationName}
-                                    onChange={(e) => setEditedMedicationName(e.target.value)}
-                                />
-                                <div className="medication-actions">
-                                    <button onClick={handleSaveEdit}>Save</button>
-                                    <button onClick={handleCancelEdit}>Cancel</button>
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                {medication.name}
-                                <div className="medication-actions">
-                                    <button onClick={() => handleEditMedication(medication)}>
-                                        Edit
-                                    </button>
-                                   <button onClick={() => handleDeleteMedication(medication)}>
-                                        Delete
-                                    </button>
-                                </div>
-                            </>
-                                        )}
-                                    </li>
-                                ))}
-                            </ul>
-                            <button onClick={() => navigate("/medications/create")}>Add Medication</button>
-                        </div>
+            <table className="medications-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Manufacturer</th>
+                        <th>Expiration Date</th>
+                        <th>Quantity in Stock</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {medications.map((medication) => (
+                        <tr key={medication.id}>
+                            <td>
+                                {editingMedication?.id === medication.id ? (
+                                    <input
+                                        type="text"
+                                        value={editedMedicationName}
+                                        onChange={(e) => setEditedMedicationName(e.target.value)}
+                                    />
+                                ) : (
+                                    medication.name
+                                )}
+                            </td>
+                            <td>
+                                {editingMedication?.id === medication.id ? (
+                                    <input
+                                        type="text"
+                                        value={editingMedication?.manufacturer || ""}
+                                        onChange={(e) => setEditingMedication({...editingMedication, manufacturer: e.target.value})}
+                                    />
+                                ) : (
+                                    medication.manufacturer
+                                )}
+                            </td>
+                            <td>
+                                {editingMedication?.id === medication.id ? (
+                                    <input
+                                        type="date"
+                                        value={editingMedication?.expirationDate || ""}
+                                        onChange={(e) => setEditingMedication({...editingMedication, expirationDate: e.target.value})}
+                                    />
+                                ) : (
+                                    new Date(medication.expirationDate).toLocaleDateString()
+                                )}
+                            </td>
+                            <td>
+                                {editingMedication?.id === medication.id ? (
+                                    <input
+                                        type="number"
+                                        value={editingMedication?.quantityInStock || 0}
+                                        onChange={(e) => setEditingMedication({...editingMedication, quantityInStock: parseInt(e.target.value)})}
+                                    />
+                                ) : (
+                                    medication.quantityInStock
+                                )}
+                            </td>
+                            <td>
+                                {editingMedication?.id === medication.id ? (
+                                    <>
+                                        <button onClick={handleSaveEdit}>Save</button>
+                                        <button onClick={handleCancelEdit}>Cancel</button>
+                                    </>
+                                ) : (
+                                    <>
+                                        <button onClick={() => handleEditMedication(medication)}>
+                                            Edit
+                                        </button>
+                                        <button onClick={() => handleDeleteMedication(medication)}>
+                                            Delete
+                                        </button>
+                                    </>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <button onClick={() => navigate("/medications/create")}>Add Medication</button>
+        </div>
     );
 }
