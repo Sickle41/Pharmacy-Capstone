@@ -4,6 +4,7 @@ import { getMedications, updateMedication, deleteMedication, getMedicationById }
 import { useNavigate } from "react-router-dom";
 
 export const Medications = () => {
+    const navigate = useNavigate();
     const [medications, setMedications] = useState([]);
     const [editingMedication, setEditingMedication] = useState(null);
     const [editedMedicationName, setEditedMedicationName] = useState("");
@@ -68,24 +69,6 @@ export const Medications = () => {
             });
     };
 
-    const handleAddMedication = () => {
-        if (newMedicationName.trim() === "") {
-            alert("Medication name cannot be empty.");
-            return;
-        }
-
-        const newMedication = { name: newMedicationName };
-
-        addMedication(newMedication)
-            .then(() => {
-                fetchMedications(); // Refresh the medication list
-                setNewMedicationName(""); // Clear the input field
-            })
-            .catch((error) => {
-                console.error("Error adding medication:", error);
-            });
-    };
-
     return (
         <div className="medications-container">
             <h2>Medications</h2>
@@ -116,17 +99,11 @@ export const Medications = () => {
                                     </button>
                                 </div>
                             </>
-                        )}
-                    </li>
-                ))}
-            </ul>
-            <input
-                type="text"
-                placeholder="New medication name"
-                value={newMedicationName}
-                onChange={(e) => setNewMedicationName(e.target.value)}
-            />
-            <button onClick={handleAddMedication}>Add Medication</button>
-        </div>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                            <button onClick={() => navigate("/medications/create")}>Add Medication</button>
+                        </div>
     );
 }

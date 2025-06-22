@@ -37,3 +37,13 @@ export const deleteMedication = (medication) => {
         return res.status; // Return the status code for success
     });
 };
+
+export const addMedication = (medication) => {
+    return fetch(_apiUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(medication),
+    }).then((res) => res.json());
+};

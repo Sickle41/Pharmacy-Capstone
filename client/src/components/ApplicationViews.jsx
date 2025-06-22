@@ -4,6 +4,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { Home } from "./home/Home";
 import { Medications } from "./medications/Medications";
+import { CreateMedications } from "./medications/createMedications/CreateMedications";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -23,6 +24,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             <AuthorizedRoute loggedInUser={loggedInUser}>
               <Medications loggedInUser={loggedInUser} />
            </AuthorizedRoute>
+          }
+        />
+         <Route
+          path="/medications/create"
+          element={
+            <AuthorizedRoute loggedInUser={loggedInUser}>
+              <CreateMedications loggedInUser={loggedInUser} />
+            </AuthorizedRoute>
           }
         />
         <Route
