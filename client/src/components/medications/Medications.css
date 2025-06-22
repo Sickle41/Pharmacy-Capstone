@@ -1,0 +1,41 @@
+.medications-container {
+    padding: 20px;
+  }
+  
+  .medications-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .medication-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+.medications-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .medications-table th,
+  .medications-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .medications-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .medication-actions button {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .medication-space {
+    margin-bottom: 10px;
+  }
