@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addMedication } from "../../../managers/medicationManager";
+import { getSuppliers } from "../../../managers/supplierManager";
 import "./CreateMedications.css";
 
-export const CreateMedications = () => {
+export const CreateMedications = ({ loggedInUser }) => {
     const [name, setName] = useState("");
     const [manufacturer, setManufacturer] = useState("");
     const [expirationDate, setExpirationDate] = useState("");
     const [quantityInStock, setQuantityInStock] = useState(0);
-    const [supplierIds, setSupplierIds] = useState("");
+    const [supplierId, setSupplierId] = useState(0);
+    const [suppliers, setSuppliers] = useState([]);
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
@@ -19,7 +21,8 @@ export const CreateMedications = () => {
             manufacturer: manufacturer,
             expirationDate: expirationDate,
             quantityInStock: parseInt(quantityInStock),
-            supplierIds: supplierIds.split(",").map(id => parseInt(id.trim()))
+            supplierIds: [supplierId],
+            userProfileId: loggedInUser.id,
         };
 
         addMedication(newMedication)
@@ -30,6 +33,14 @@ export const CreateMedications = () => {
                 console.error("Error adding medication:", error);
             });
     };
+
+    useEffect(() => {
+        getSuppliers()
+            .then(setSuppliers)
+            .catch((error) => {
+                console.error("Error fetching suppliers:", error);
+            });
+    }, []);
 
     return (
         <div className="create-medication-container">
@@ -76,13 +87,21 @@ export const CreateMedications = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="supplierIds">Supplier IDs (comma-separated):</label>
-                    <input
-                        type="text"
-                        id="supplierIds"
-                        value={supplierIds}
-                        onChange={(e) => setSupplierIds(e.target.value)}
-                    />
+                    <label htmlFor="supplierId">Supplier:</label>
+                    <select
+                        id="supplierId"
+                        value={supplierId}
+                        onChange={(e) => {
+                            setSupplierId(parseInt(e.target.value));
+                        }}
+                    >
+                        <option value={0}>Select a supplier</option>
+                        {suppliers.map((supplier) => (
+                            <option key={supplier.id} value={supplier.id}>
+                                {supplier.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
                 <button type="submit">Create Medication</button>
             </form>
