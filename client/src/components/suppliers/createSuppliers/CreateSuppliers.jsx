@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { addSupplier } from "../../managers/supplierManager";
-import "./CreateSuppliers.css";
+import { addSupplier } from "../../../managers/supplierManager";
 
 export const CreateSuppliers = () => {
     const [name, setName] = useState("");
@@ -13,13 +12,16 @@ export const CreateSuppliers = () => {
 
         const newSupplier = {
             name: name,
-            contactInfo: contactInfo
+            contactInfo: contactInfo,
         };
 
         addSupplier(newSupplier)
             .then(() => {
                 navigate("/suppliers");
             });
+
+        return;
+
     };
 
     return (
