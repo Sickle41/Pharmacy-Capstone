@@ -4,7 +4,7 @@ export const getSuppliers = () => {
     return fetch(_apiUrl).then((res) => res.json());
 }
 
-export const getSupplierById = () => {
+export const getSupplierById = (id) => {
     return fetch(`${_apiUrl}/${id}`).then((res) => res.json());
 }
 
@@ -44,6 +44,9 @@ export const updateSupplier = (supplier) => {
     }).then((res) => {
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        if (res.status === 204) {
+            return null; // Or return undefined;
         }
         return res.json(); // Return the JSON response for success
     });
