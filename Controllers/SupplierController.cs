@@ -80,4 +80,28 @@ public class SupplierController : ControllerBase
 
         return Created($"/api/supplier/{supplier.Id}", supplier);
     }
+
+    [HttpPut("{id}")]
+
+    public IActionResult PutSupplier(SupplierDto supplierDto, int id)
+    {
+        Supplier SupplierToUpdate = _dbContext.Suppliers.SingleOrDefault(wo => wo.Id == id);
+        if (SupplierToUpdate == null)
+        {
+            return NotFound();
+        }
+        else if (id != supplierDto.Id)
+        {
+            return BadRequest();
+        }
+
+        //These are the only properties that we want to make editable
+        SupplierToUpdate.Name = supplierDto.Name;
+        SupplierToUpdate.ContactInfo = supplierDto.ContactInfo;
+
+        _dbContext.SaveChanges();
+
+        return NoContent();
+    }
+    
 }
