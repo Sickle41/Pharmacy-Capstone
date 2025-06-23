@@ -7,4 +7,3 @@ export const getUserProfiles = () => {
 export const getUserProfilesWithRoles = () => {
   return fetch(_apiUrl + "/withroles").then((res) => res.json());
 };
-
