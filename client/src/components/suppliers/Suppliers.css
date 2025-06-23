@@ -1,0 +1,41 @@
+.suppliers-container {
+    padding: 20px;
+  }
+  
+  .suppliers-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .supplier-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+
+.suppliers-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .suppliers-table th,
+  .suppliers-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .suppliers-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .supplier-actions button {
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  .supplier-space {
+    margin-bottom: 10px;
+  }

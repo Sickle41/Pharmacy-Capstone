@@ -8,7 +8,6 @@ export const Medications = () => {
     const [medications, setMedications] = useState([]);
     const [editingMedication, setEditingMedication] = useState(null);
     const [editedMedicationName, setEditedMedicationName] = useState("");
-    const [newMedicationName, setNewMedicationName] = useState("");
 
     useEffect(() => {
         fetchMedications();
