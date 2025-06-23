@@ -33,3 +33,18 @@ export const addSupplier = (supplier) => {
         return res.json();
     });
 };
+
+export const updateSupplier = (supplier) => {
+    return fetch(`${_apiUrl}/${supplier.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(supplier),
+    }).then((res) => {
+        if (!res.ok) {
+            throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json(); // Return the JSON response for success
+    });
+};

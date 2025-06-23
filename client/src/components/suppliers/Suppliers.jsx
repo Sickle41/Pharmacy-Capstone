@@ -78,9 +78,7 @@ export const Suppliers = () => {
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Manufacturer</th>
-                        <th>Expiration Date</th>
-                        <th>Quantity in Stock</th>
+                        <th>Contact Info</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -102,33 +100,11 @@ export const Suppliers = () => {
                                 {editingSupplier?.id === supplier.id ? (
                                     <input
                                         type="text"
-                                        value={editingSupplier?.manufacturer || ""}
-                                        onChange={(e) => setEditingSupplier({...editingSupplier, manufacturer: e.target.value})}
+                                        value={editingSupplier?.contactInfo || ""}
+                                        onChange={(e) => setEditingSupplier({...editingSupplier, contactInfo: e.target.value})}
                                     />
                                 ) : (
-                                    supplier.manufacturer
-                                )}
-                            </td>
-                            <td>
-                                {editingSupplier?.id === supplier.id ? (
-                                    <input
-                                        type="date"
-                                        value={editingSupplier?.expirationDate || ""}
-                                        onChange={(e) => setEditingSupplier({...editingSupplier, expirationDate: e.target.value})}
-                                    />
-                                ) : (
-                                    new Date(supplier.expirationDate).toLocaleDateString()
-                                )}
-                            </td>
-                            <td>
-                                {editingSupplier?.id === supplier.id ? (
-                                    <input
-                                        type="number"
-                                        value={editingSupplier?.quantityInStock || 0}
-                                        onChange={(e) => setEditingSupplier({...editingSupplier, quantityInStock: parseInt(e.target.value)})}
-                                    />
-                                ) : (
-                                    supplier.quantityInStock
+                                    supplier.contactInfo
                                 )}
                             </td>
                             <td>
