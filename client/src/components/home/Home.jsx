@@ -37,31 +37,107 @@ export const Home = () => {
     const totalQuantity = calculateTotalQuantity();
 
     return (
+    
         <div className="home-container">
-            <div className="column">
-                <h2>Medications</h2>
-                <p>Total Medications: {medications.length}</p>
-                <p>Total Quantity: {totalQuantity}</p>
+            <div className="row">
+                <div className="col-12">
+                    <h2>Medications</h2>
+                    <table className="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Total Medications</th>
+                                <th>Total Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div className="d-flex flex-column">
+                                        <div>Total:</div>
+                                        <div>{medications.length}</div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div className="d-flex flex-column">
+                                        <div>Quantity:</div>
+                                        <div>{totalQuantity}</div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div className="column">
-                <h2>Restocks (Past Month)</h2>
-                <ul>
-                    {restocks.map((restock) => (
-                            <li key={restock.id}>
-                               Name {restock.medication} - Quantity Added {restock.quantityAdded} - Date Added {new Date(restock.date).toLocaleDateString()}
-                            </li>
-                        ))}
-                </ul>
+
+            <div className="row">
+                <div className="col-12">
+                    <h2>Restocks (Past Month)</h2>
+                    <table className="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Quantity Added</th>
+                                <th>Date Added</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {restocks.map((restock) => (
+                                <tr key={restock.id}>
+                                    <td>
+                                        <div className="d-flex flex-column">
+                                            <div>Name:</div>
+                                            <div>{restock.medication}</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="d-flex flex-column">
+                                            <div>Quantity:</div>
+                                            <div>{restock.quantityAdded}</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="d-flex flex-column">
+                                            <div>Date:</div>
+                                            <div>{new Date(restock.date).toLocaleDateString()}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div className="column">
-                <h2>Expiring Medications (Next Month)</h2>
-                <ul>
-                    {expiringMedications.map((medication) => (
-                        <li key={medication.id}>
-                            {medication.name} - Expiration Date {new Date(medication.expirationDate).toLocaleDateString()}
-                        </li>
-                    ))}
-                </ul>
+
+            <div className="row">
+                <div className="col-12">
+                    <h2>Expiring Medications (Next Month)</h2>
+                    <table className="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Expiration Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {expiringMedications.map((medication) => (
+                                <tr key={medication.id}>
+                                    <td>
+                                        <div className="d-flex flex-column">
+                                            <div>Name:</div>
+                                            <div>{medication.name}</div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="d-flex flex-column">
+                                            <div>Expiration:</div>
+                                            <div>{new Date(medication.expirationDate).toLocaleDateString()}</div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     );

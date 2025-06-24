@@ -1,6 +1,4 @@
 .home-container {
-    display: flex;
-    justify-content: space-around;
     padding: 20px;
 }
 
@@ -10,7 +8,6 @@
 
   @media (min-width: 768px) {
     .column {
-      width: 30%;
       border: 1px solid #ccc;
       padding: 10px;
     }

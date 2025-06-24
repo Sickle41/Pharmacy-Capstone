@@ -166,22 +166,47 @@ export const Restocks = () => {
       return (
         <tr key={restock.id} className="restock-item">
           <td>
-            {medications.find((m) => m.id === restock.medicationId)?.name ||
-              "Unknown Medication"}
+            <div className="d-flex flex-column">
+              <div>Medication:</div>
+              <div>
+                {medications.find((m) => m.id === restock.medicationId)?.name ||
+                  "Unknown Medication"}
+              </div>
+            </div>
           </td>
           <td>
-            {suppliers.find((s) => s.id === restock.supplierId)?.name ||
-              "Unknown Supplier"}
+            <div className="d-flex flex-column">
+              <div>Supplier:</div>
+              <div>
+                {suppliers.find((s) => s.id === restock.supplierId)?.name ||
+                  "Unknown Supplier"}
+              </div>
+            </div>
           </td>
-          <td>{restock.quantityAdded}</td>
-          <td>{new Date(restock.dateAdded).toLocaleDateString()}</td>
           <td>
-            {loggedInUser?.id === restock.userProfileId && (
-            <>
-            <button onClick={() => handleEditRestock(restock)}>Edit</button>
-            <button onClick={() => handleDeleteRestock(restock)}>Delete</button>
-            </>
-            )}
+            <div className="d-flex flex-column">
+              <div>Quantity Added:</div>
+              <div>{restock.quantityAdded}</div>
+            </div>
+          </td>
+          <td>
+            <div className="d-flex flex-column">
+              <div>Date Added:</div>
+              <div>{new Date(restock.dateAdded).toLocaleDateString()}</div>
+            </div>
+          </td>
+          <td>
+            <div className="d-flex flex-column">
+              <div>Actions:</div>
+              <div>
+                {loggedInUser?.id === restock.userProfileId && (
+                  <>
+                    <button onClick={() => handleEditRestock(restock)}>Edit</button>
+                    <button onClick={() => handleDeleteRestock(restock)}>Delete</button>
+                  </>
+                )}
+              </div>
+            </div>
           </td>
         </tr>
       );
@@ -191,8 +216,8 @@ export const Restocks = () => {
   return (
     <div className="restocks-container">
       <h2>Restocks</h2>
-      <div className="restocks-table-wrapper">
-  <table className="restocks-table">
+      <div className="table-responsive">
+  <table className="table table-striped table-bordered">
     <thead>
       <tr>
         <th>Medication</th>
