@@ -48,6 +48,11 @@ return (
                         Restocks
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/userProfile">
+                        User Profile
+                    </NavLink>
+                </NavItem>
             </Nav>
             </Collapse>
             <Button

@@ -9,6 +9,7 @@ import { Suppliers } from "./suppliers/Suppliers";
 import { CreateSuppliers } from "./suppliers/createSuppliers/CreateSuppliers";
 import { Restocks } from "./restocks/Restocks"; 
 import { CreateRestock } from "./restocks/createRestock/CreateRestock";
+import { UserProfile } from "./userProfile/UserProfile";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -68,6 +69,14 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
         element={
           <AuthorizedRoute loggedInUser={loggedInUser}>
             <CreateRestock loggedInUser={loggedInUser} />
+          </AuthorizedRoute>
+        }
+        />
+        <Route 
+        path="/userProfile"
+        element={
+          <AuthorizedRoute loggedInUser={loggedInUser}>
+            <UserProfile loggedInUser={loggedInUser} />
           </AuthorizedRoute>
         }
         />
