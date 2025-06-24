@@ -11,7 +11,7 @@ export const Home = () => {
     useEffect(() => {
         getMedications()
             .then((data) => {
-                console.log("Medications:", data);
+                
                 setMedications(data);
             });
 
@@ -19,7 +19,7 @@ export const Home = () => {
         recentRestocks()
             .then(setRestocks)
             .then(() => {
-                console.log("Restocks:", restocks);
+                
             });
         // Fetch medications expiring in the next month
         expiringSoonMedications()

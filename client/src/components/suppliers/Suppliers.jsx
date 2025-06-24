@@ -2,12 +2,20 @@ import { useState, useEffect } from "react";
 import "./Suppliers.css";
 import { getSuppliers, updateSupplier, deleteSupplier, getSupplierById } from "../../managers/supplierManager";
 import { useNavigate } from "react-router-dom";
+import { tryGetLoggedInUser } from "../../managers/authManager";
 
 export const Suppliers = () => {
     const navigate = useNavigate();
     const [suppliers, setSuppliers] = useState([]);
     const [editingSupplier, setEditingSupplier] = useState(null);
     const [editedSupplierName, setEditedSupplierName] = useState("");
+    const [loggedInUser, setLoggedInUser] = useState(null);
+
+    useEffect(() => {
+        tryGetLoggedInUser().then(user => {
+            setLoggedInUser(user);
+        });
+    }, []);
 
     useEffect(() => {
         fetchSuppliers();
@@ -115,12 +123,16 @@ export const Suppliers = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <button onClick={() => handleEditSupplier(supplier)}>
-                                            Edit
-                                        </button>
-                                        <button onClick={() => handleDeleteSupplier(supplier)}>
-                                            Delete
-                                        </button>
+                                        {loggedInUser?.id === supplier.userProfileId && (
+                                            <>
+                                                <button onClick={() => handleEditSupplier(supplier)}>
+                                                    Edit
+                                                </button>
+                                                <button onClick={() => handleDeleteSupplier(supplier)}>
+                                                    Delete
+                                                </button>
+                                            </>
+                                        )}
                                     </>
                                 )}
                             </td>

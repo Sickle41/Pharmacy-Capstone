@@ -5,7 +5,13 @@
 }
 
 .column {
-    width: 30%;
-    border: 1px solid #ccc;
-    padding: 10px;
-}
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    .column {
+      width: 30%;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  }
