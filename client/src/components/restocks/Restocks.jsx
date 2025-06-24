@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import {getRestocks,deleteRestock,updateRestock,} from "../../managers/restockManager";
 import { getMedications } from "../../managers/medicationManager";
 import { getSuppliers } from "../../managers/supplierManager";
+import { useNavigate } from "react-router-dom";
 import "./Restocks.css";
 
 export const Restocks = () => {
+  const navigate = useNavigate();
   const [restocks, setRestocks] = useState([]);
   const [medications, setMedications] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
