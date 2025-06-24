@@ -3,6 +3,7 @@ import {getRestocks,deleteRestock,updateRestock,} from "../../managers/restockMa
 import { getMedications } from "../../managers/medicationManager";
 import { getSuppliers } from "../../managers/supplierManager";
 import { useNavigate } from "react-router-dom";
+import { tryGetLoggedInUser } from "../../managers/authManager";
 import "./Restocks.css";
 
 export const Restocks = () => {
@@ -17,6 +18,13 @@ export const Restocks = () => {
     quantityAdded: 0,
     dateAdded: "",
   });
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  useEffect(() => {
+      tryGetLoggedInUser().then(user => {
+          setLoggedInUser(user);
+      });
+  }, []);
 
   useEffect(() => {
     fetchData();
@@ -87,85 +95,95 @@ export const Restocks = () => {
   const renderRestockItem = (restock) => {
     if (editingRestockId === restock.id) {
       return (
-        <li key={restock.id} className="restock-item">
-          <select
-            value={editingRestock.medicationId}
-            onChange={(e) =>
-              setEditingRestock({
-                ...editingRestock,
-                medicationId: parseInt(e.target.value),
-              })
-            }
-          >
-            <option value="">Select Medication</option>
-            {medications.map((medication) => (
-              <option key={medication.id} value={medication.id}>
-                {medication.name}
-              </option>
-            ))}
-          </select>
-
-          <select
-            value={editingRestock.supplierId}
-            onChange={(e) =>
-              setEditingRestock({
-                ...editingRestock,
-                supplierId: parseInt(e.target.value),
-              })
-            }
-          >
-            <option value="">Select Supplier</option>
-            {suppliers.map((supplier) => (
-              <option key={supplier.id} value={supplier.id}>
-                {supplier.name}
-              </option>
-            ))}
-          </select>
-
-          <input
-            type="number"
-            value={editingRestock.quantityAdded}
-            onChange={(e) =>
-              setEditingRestock({
-                ...editingRestock,
-                quantityAdded: parseInt(e.target.value),
-              })
-            }
-          />
-
-          <input
-            type="date"
-            value={editingRestock.dateAdded}
-            onChange={(e) =>
-              setEditingRestock({
-                ...editingRestock,
-                dateAdded: e.target.value,
-              })
-            }
-          />
-
-          <button onClick={handleSaveEdit}>Save</button>
-          <button onClick={handleCancelEdit}>Cancel</button>
-        </li>
+        <tr key={restock.id} className="restock-item">
+          <td>
+            <select
+              value={editingRestock.medicationId}
+              onChange={(e) =>
+                setEditingRestock({
+                  ...editingRestock,
+                  medicationId: parseInt(e.target.value),
+                })
+              }
+            >
+              <option value="">Select Medication</option>
+              {medications.map((medication) => (
+                <option key={medication.id} value={medication.id}>
+                  {medication.name}
+                </option>
+              ))}
+            </select>
+          </td>
+          <td>
+            <select
+              value={editingRestock.supplierId}
+              onChange={(e) =>
+                setEditingRestock({
+                  ...editingRestock,
+                  supplierId: parseInt(e.target.value),
+                })
+              }
+            >
+              <option value="">Select Supplier</option>
+              {suppliers.map((supplier) => (
+                <option key={supplier.id} value={supplier.id}>
+                  {supplier.name}
+                </option>
+              ))}
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              value={editingRestock.quantityAdded}
+              onChange={(e) =>
+                setEditingRestock({
+                  ...editingRestock,
+                  quantityAdded: parseInt(e.target.value),
+                })
+              }
+            />
+          </td>
+          <td>
+            <input
+              type="date"
+              value={editingRestock.dateAdded}
+              onChange={(e) =>
+                setEditingRestock({
+                  ...editingRestock,
+                  dateAdded: e.target.value,
+                })
+              }
+            />
+          </td>
+          <td>
+            <button onClick={handleSaveEdit}>Save</button>
+            <button onClick={handleCancelEdit}>Cancel</button>
+          </td>
+        </tr>
       );
     } else {
       return (
-        <li key={restock.id} className="restock-item">
-          <p>
-            Medication:{" "}
+        <tr key={restock.id} className="restock-item">
+          <td>
             {medications.find((m) => m.id === restock.medicationId)?.name ||
               "Unknown Medication"}
-          </p>
-          <p>
-            Supplier:{" "}
+          </td>
+          <td>
             {suppliers.find((s) => s.id === restock.supplierId)?.name ||
               "Unknown Supplier"}
-          </p>
-          <p>Quantity Added: {restock.quantityAdded}</p>
-          <p>Date Added: {new Date(restock.dateAdded).toLocaleDateString()}</p>
-          <button onClick={() => handleEditRestock(restock)}>Edit</button>
-          <button onClick={() => handleDeleteRestock(restock)}>Delete</button>
-        </li>
+          </td>
+          <td>{restock.quantityAdded}</td>
+          <td>{new Date(restock.dateAdded).toLocaleDateString()}</td>
+          <td>
+            {loggedInUser?.id === restock.userProfileId && (
+            <>
+            <button onClick={() => handleEditRestock(restock)}>Edit</button>
+            <button onClick={() => handleDeleteRestock(restock)}>Delete</button>
+            </>
+            )}
+          </td>
+        </tr>
       );
     }
   };
@@ -173,9 +191,23 @@ export const Restocks = () => {
   return (
     <div className="restocks-container">
       <h2>Restocks</h2>
-      <ul className="restocks-list">
-        {restocks.map((restock) => renderRestockItem(restock))}
-      </ul>
+      <div className="restocks-table-wrapper">
+  <table className="restocks-table">
+    <thead>
+      <tr>
+        <th>Medication</th>
+        <th>Supplier</th>
+        <th>Quantity Added</th>
+        <th>Date Added</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {restocks.map((restock) => renderRestockItem(restock))}
+    </tbody>
+  </table>
+</div>
+
       <button onClick={() => navigate("/restocks/create")}>Add Restock</button>
     </div>
   );

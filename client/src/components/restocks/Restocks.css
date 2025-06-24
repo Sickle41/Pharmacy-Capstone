@@ -1,19 +1,14 @@
 .restocks-container {
   font-family: Arial, sans-serif;
   padding: 20px;
-}
-
-.restocks-list {
-  list-style: none;
-  padding: 0;
+  
 }
 
 .restock-item {
   border: 1px solid #ddd;
   margin-bottom: 10px;
   padding: 10px;
-  display: flex;
-  flex-direction: column;
+  display: table-row;
 }
 
 .restock-item p {
@@ -45,4 +40,26 @@
   margin-bottom: 5px;
   padding: 8px;
   border: 1px solid #ddd;
+}
+
+.restocks-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.restocks-table {
+  width: 100%;
+  min-width: 600px;
+}
+
+
+.restocks-table th,
+.restocks-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.restocks-table th {
+  background-color: #f2f2f2;
 }

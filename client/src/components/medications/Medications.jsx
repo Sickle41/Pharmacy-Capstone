@@ -3,11 +3,19 @@ import "./Medications.css";
 import { getMedications, updateMedication, deleteMedication, getMedicationById } from "../../managers/medicationManager";
 import { useNavigate } from "react-router-dom";
 
+import { tryGetLoggedInUser } from "../../managers/authManager";
 export const Medications = () => {
     const navigate = useNavigate();
     const [medications, setMedications] = useState([]);
     const [editingMedication, setEditingMedication] = useState(null);
     const [editedMedicationName, setEditedMedicationName] = useState("");
+    const [loggedInUser, setLoggedInUser] = useState(null);
+
+    useEffect(() => {
+        tryGetLoggedInUser().then(user => {
+            setLoggedInUser(user);
+        });
+    }, []);
 
     useEffect(() => {
         fetchMedications();
@@ -139,12 +147,16 @@ export const Medications = () => {
                                     </>
                                 ) : (
                                     <>
-                                        <button onClick={() => handleEditMedication(medication)}>
-                                            Edit
-                                        </button>
-                                        <button onClick={() => handleDeleteMedication(medication)}>
-                                            Delete
-                                        </button>
+                                        {loggedInUser?.id === medication.userProfileId && (
+                                            <>
+                                                <button onClick={() => handleEditMedication(medication)}>
+                                                    Edit
+                                                </button>
+                                                <button onClick={() => handleDeleteMedication(medication)}>
+                                                    Delete
+                                                </button>
+                                            </>
+                                        )}
                                     </>
                                 )}
                             </td>
