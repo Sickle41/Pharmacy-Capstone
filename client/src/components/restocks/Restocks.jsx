@@ -174,6 +174,7 @@ export const Restocks = () => {
       <ul className="restocks-list">
         {restocks.map((restock) => renderRestockItem(restock))}
       </ul>
+      <button onClick={() => navigate("/restocks/create")}>Add Restock</button>
     </div>
   );
 };
