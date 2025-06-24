@@ -1,0 +1,24 @@
+.user-profile-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.user-info {
+    margin-bottom: 20px;
+}
+
+.user-info p {
+    margin: 5px 0;
+}
+
+.user-profile-container button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.user-profile-container button:hover {
+    background-color: #0056b3;
+}
