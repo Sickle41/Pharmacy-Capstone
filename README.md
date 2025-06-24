@@ -99,7 +99,7 @@ Edit
 cd client
 npm install
 npm start
-The app should open at http://localhost:3000 and connect to the backend API at https://localhost:5001 (or your configured port).
+The app should open at http://localhost:5173 and connect to the backend API at https://localhost:5001 (or your configured port).
 
 🧗 Difficulties & Challenges Faced
 EF Core Many-to-Many Configuration: Setting up a composite key and relationship for the MedicationSupplier join table required careful Fluent API configuration.
