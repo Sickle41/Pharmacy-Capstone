@@ -43,6 +43,11 @@ return (
                         Suppliers
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/restocks">
+                        Restocks
+                    </NavLink>
+                </NavItem>
             </Nav>
             </Collapse>
             <Button

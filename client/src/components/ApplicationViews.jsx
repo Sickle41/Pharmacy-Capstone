@@ -7,6 +7,8 @@ import { Medications } from "./medications/Medications";
 import { CreateMedications } from "./medications/createMedications/CreateMedications";
 import { Suppliers } from "./suppliers/Suppliers";
 import { CreateSuppliers } from "./suppliers/createSuppliers/CreateSuppliers";
+import { Restocks } from "./restocks/Restocks"; 
+import { CreateRestock } from "./restocks/createRestock/CreateRestock";
 
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
@@ -44,6 +46,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
             </AuthorizedRoute>
           }
         />
+     
         <Route
           path="/suppliers/create"
           element={
@@ -51,6 +54,22 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
               <CreateSuppliers loggedInUser={loggedInUser} />
             </AuthorizedRoute>
           }
+        />
+         <Route 
+        path="/restocks"
+        element={
+          <AuthorizedRoute loggedInUser={loggedInUser}>
+            <Restocks loggedInUser={loggedInUser} />
+          </AuthorizedRoute>
+        }
+        />
+         <Route 
+        path="/restocks/create"
+        element={
+          <AuthorizedRoute loggedInUser={loggedInUser}>
+            <CreateRestock loggedInUser={loggedInUser} />
+          </AuthorizedRoute>
+        }
         />
         <Route
           path="login"

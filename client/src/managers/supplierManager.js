@@ -1,3 +1,5 @@
+import * as authManager from './authManager';
+
 const _apiUrl = "/api/supplier";
 
 export const getSuppliers = () => {
@@ -19,7 +21,6 @@ export const deleteSupplier = (supplier) => {
     });
 };
 
-import * as authManager from './authManager';
 
 export const addSupplier = (supplier) => {
   return authManager.tryGetLoggedInUser()

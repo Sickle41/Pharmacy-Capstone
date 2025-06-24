@@ -4,6 +4,8 @@ using PharmacyCapstone.Data;
 using PharmacyCapstone.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using PharmacyCapstone.Models;
+using System.Security.Claims;
 
 namespace PharmacyCapstone.Controllers;
 
@@ -59,6 +61,6 @@ public class UserProfileController : ControllerBase
             .ToList()
         }));
     }
-
+    
 
 }
