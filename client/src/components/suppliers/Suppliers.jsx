@@ -82,7 +82,8 @@ export const Suppliers = () => {
     return (
         <div className="suppliers-container">
             <h2>Suppliers</h2>
-            <table className="suppliers-table">
+            <div className="table-responsive">
+            <table className="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -94,52 +95,68 @@ export const Suppliers = () => {
                     {suppliers.map((supplier) => (
                         <tr key={supplier.id}>
                             <td>
-                                {editingSupplier?.id === supplier.id ? (
-                                    <input
-                                        type="text"
-                                        value={editedSupplierName}
-                                        onChange={(e) => setEditedSupplierName(e.target.value)}
-                                    />
-                                ) : (
-                                    supplier.name
-                                )}
+                                <div className="d-flex flex-column">
+                                    <div>Name:</div>
+                                    <div>
+                                        {editingSupplier?.id === supplier.id ? (
+                                            <input
+                                                type="text"
+                                                value={editedSupplierName}
+                                                onChange={(e) => setEditedSupplierName(e.target.value)}
+                                            />
+                                        ) : (
+                                            supplier.name
+                                        )}
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                {editingSupplier?.id === supplier.id ? (
-                                    <input
-                                        type="text"
-                                        value={editingSupplier?.contactInfo || ""}
-                                        onChange={(e) => setEditingSupplier({...editingSupplier, contactInfo: e.target.value})}
-                                    />
-                                ) : (
-                                    supplier.contactInfo
-                                )}
+                                <div className="d-flex flex-column">
+                                    <div>Contact Info:</div>
+                                    <div>
+                                        {editingSupplier?.id === supplier.id ? (
+                                            <input
+                                                type="text"
+                                                value={editingSupplier?.contactInfo || ""}
+                                                onChange={(e) => setEditingSupplier({...editingSupplier, contactInfo: e.target.value})}
+                                            />
+                                        ) : (
+                                            supplier.contactInfo
+                                        )}
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                {editingSupplier?.id === supplier.id ? (
-                                    <>
-                                        <button onClick={handleSaveEdit}>Save</button>
-                                        <button onClick={handleCancelEdit}>Cancel</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        {loggedInUser?.id === supplier.userProfileId && (
+                                <div className="d-flex flex-column">
+                                    <div>Actions:</div>
+                                    <div>
+                                        {editingSupplier?.id === supplier.id ? (
                                             <>
-                                                <button onClick={() => handleEditSupplier(supplier)}>
-                                                    Edit
-                                                </button>
-                                                <button onClick={() => handleDeleteSupplier(supplier)}>
-                                                    Delete
-                                                </button>
+                                                <button onClick={handleSaveEdit}>Save</button>
+                                                <button onClick={handleCancelEdit}>Cancel</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {loggedInUser?.id === supplier.userProfileId && (
+                                                    <>
+                                                        <button onClick={() => handleEditSupplier(supplier)}>
+                                                            Edit
+                                                        </button>
+                                                        <button onClick={() => handleDeleteSupplier(supplier)}>
+                                                            Delete
+                                                        </button>
+                                                    </>
+                                                )}
                                             </>
                                         )}
-                                    </>
-                                )}
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            </div>
             <button onClick={() => navigate("/suppliers/create")}>Add Supplier</button>
         </div>
     );

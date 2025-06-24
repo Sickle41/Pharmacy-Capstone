@@ -42,24 +42,3 @@
   border: 1px solid #ddd;
 }
 
-.restocks-table-wrapper {
-  width: 100%;
-  overflow-x: auto;
-}
-
-.restocks-table {
-  width: 100%;
-  min-width: 600px;
-}
-
-
-.restocks-table th,
-.restocks-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-
-.restocks-table th {
-  background-color: #f2f2f2;
-}

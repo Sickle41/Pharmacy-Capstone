@@ -82,7 +82,8 @@ export const Medications = () => {
     return (
         <div className="medications-container">
             <h2>Medications</h2>
-            <table className="medications-table">
+            <div className="table-responsive">
+            <table className="table table-striped table-bordered">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -96,74 +97,100 @@ export const Medications = () => {
                     {medications.map((medication) => (
                         <tr key={medication.id}>
                             <td>
-                                {editingMedication?.id === medication.id ? (
-                                    <input
-                                        type="text"
-                                        value={editedMedicationName}
-                                        onChange={(e) => setEditedMedicationName(e.target.value)}
-                                    />
-                                ) : (
-                                    medication.name
-                                )}
+                                <div className="d-flex flex-column">
+                                    <div>Name:</div>
+                                    <div>
+                                        {editingMedication?.id === medication.id ? (
+                                            <input
+                                                type="text"
+                                                value={editedMedicationName}
+                                                onChange={(e) => setEditedMedicationName(e.target.value)}
+                                            />
+                                        ) : (
+                                            medication.name
+                                        )}
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                {editingMedication?.id === medication.id ? (
-                                    <input
-                                        type="text"
-                                        value={editingMedication?.manufacturer || ""}
-                                        onChange={(e) => setEditingMedication({...editingMedication, manufacturer: e.target.value})}
-                                    />
-                                ) : (
-                                    medication.manufacturer
-                                )}
+                                <div className="d-flex flex-column">
+                                    <div>Manufacturer:</div>
+                                    <div>
+                                        {editingMedication?.id === medication.id ? (
+                                            <input
+                                                type="text"
+                                                value={editingMedication?.manufacturer || ""}
+                                                onChange={(e) => setEditingMedication({...editingMedication, manufacturer: e.target.value})}
+                                            />
+                                        ) : (
+                                            medication.manufacturer
+                                        )}
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                {editingMedication?.id === medication.id ? (
-                                    <input
-                                        type="date"
-                                        value={editingMedication?.expirationDate || ""}
-                                        onChange={(e) => setEditingMedication({...editingMedication, expirationDate: e.target.value})}
-                                    />
-                                ) : (
-                                    new Date(medication.expirationDate).toLocaleDateString()
-                                )}
+                                <div className="d-flex flex-column">
+                                    <div>Expiration Date:</div>
+                                    <div>
+                                        {editingMedication?.id === medication.id ? (
+                                            <input
+                                                type="date"
+                                                value={editingMedication?.expirationDate || ""}
+                                                onChange={(e) => setEditingMedication({...editingMedication, expirationDate: e.target.value})}
+                                            />
+                                        ) : (
+                                            new Date(medication.expirationDate).toLocaleDateString()
+                                        )}
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                {editingMedication?.id === medication.id ? (
-                                    <input
-                                        type="number"
-                                        value={editingMedication?.quantityInStock || 0}
-                                        onChange={(e) => setEditingMedication({...editingMedication, quantityInStock: parseInt(e.target.value)})}
-                                    />
-                                ) : (
-                                    medication.quantityInStock
-                                )}
+                                <div className="d-flex flex-column">
+                                    <div>Quantity in Stock:</div>
+                                    <div>
+                                        {editingMedication?.id === medication.id ? (
+                                            <input
+                                                type="number"
+                                                value={editingMedication?.quantityInStock || 0}
+                                                onChange={(e) => setEditingMedication({...editingMedication, quantityInStock: parseInt(e.target.value)})}
+                                            />
+                                        ) : (
+                                            medication.quantityInStock
+                                        )}
+                                    </div>
+                                </div>
                             </td>
                             <td>
-                                {editingMedication?.id === medication.id ? (
-                                    <>
-                                        <button onClick={handleSaveEdit}>Save</button>
-                                        <button onClick={handleCancelEdit}>Cancel</button>
-                                    </>
-                                ) : (
-                                    <>
-                                        {loggedInUser?.id === medication.userProfileId && (
+                                <div className="d-flex flex-column">
+                                    <div>Actions:</div>
+                                    <div>
+                                        {editingMedication?.id === medication.id ? (
                                             <>
-                                                <button onClick={() => handleEditMedication(medication)}>
-                                                    Edit
-                                                </button>
-                                                <button onClick={() => handleDeleteMedication(medication)}>
-                                                    Delete
-                                                </button>
+                                                <button onClick={handleSaveEdit}>Save</button>
+                                                <button onClick={handleCancelEdit}>Cancel</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                {loggedInUser?.id === medication.userProfileId && (
+                                                    <>
+                                                        <button onClick={() => handleEditMedication(medication)}>
+                                                            Edit
+                                                        </button>
+                                                        <button onClick={() => handleDeleteMedication(medication)}>
+                                                            Delete
+                                                        </button>
+                                                    </>
+                                                )}
                                             </>
                                         )}
-                                    </>
-                                )}
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
+            </div>
             <button onClick={() => navigate("/medications/create")}>Add Medication</button>
         </div>
     );
