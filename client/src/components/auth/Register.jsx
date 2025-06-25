@@ -96,7 +96,7 @@ export default function Register({ setLoggedInUser }) {
         />
       </FormGroup>
       <FormGroup>
-        <Label>Password</Label>
+        <Label>Password: Must Be 8 Characters Or Longer</Label>
         <Input
           invalid={passwordMismatch}
           type="password"
